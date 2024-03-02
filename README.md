@@ -46,6 +46,16 @@ Redacted output
 
 > Hello I am `[Redacted]`! I want to order a medium pizza. I live on `[Redacted]` you can reach out to me at `[Redacted]` when you are outside. Please send the receipt to `[Redacted]`. Have a nice day!
 
+Apart from some of these obvious entitites there are some other parts that are also PIA.
+In this [interesting talk](https://blog.tadsummit.com/2024/02/14/pieter-luitjens/) we find that even information such as :
+
+- Gender ♀️
+- Favourite sports team ⚽
+- Voice 🔊
+- City 🏢
+- Religion 🛐
+  Is PI. So it is a non-trivial problem to solve for.
+
 ### Demo🤖
 
 We create a simple demo application in which we upload a conversation in the form of a .wav or .mp3 file and return a .vcon file that is redacted.
