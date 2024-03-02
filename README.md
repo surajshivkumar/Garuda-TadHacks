@@ -34,7 +34,7 @@ The problem discussed is a well solved problem in the are of Natural Language Pr
 
 We now approach this by finding a model that is fine tuned to perform NER on human conversations specifically and use that for the identification.
 
-Once identified, we replace the entities with the <span style="color: red;">[REDACTED] </span> tag.
+Once identified, we replace the entities with the `[REDACTED]` tag.
 
 ### Example :
 
@@ -44,7 +44,7 @@ User prompt
 
 Redacted output
 
-> Hello I am [Redacted]! I want to order a medium pizza. I live on [Redacted] you can reach out to me at [Redacted] when you are outside. Please send the receipt to [Redacted]. Have a nice day!
+> Hello I am `[Redacted]`! I want to order a medium pizza. I live on `[Redacted]` you can reach out to me at `[Redacted]` when you are outside. Please send the receipt to `[Redacted]`. Have a nice day!
 
 ### Demo🤖
 
