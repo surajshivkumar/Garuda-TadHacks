@@ -22,7 +22,7 @@ pip install -r requirements.txt
     - Emails
     - Phone numbers
   - Redact the information found
-    - For the identified information we have replace it with a `[REDACTED` tag.
+    - For the identified information we have replace it with a `[REDACTED]` tag.
     - The audio thus created would be either
       - Beeped out
       - Silenced
@@ -34,7 +34,7 @@ The problem discussed is a well solved problem in the are of Natural Language Pr
 
 We now approach this by finding a model that is fine tuned to perform NER on human conversations specifically and use that for the identification.
 
-Once identified, we replace the entities with the `[REDACTED` tag.
+Once identified, we replace the entities with the `[REDACTED]` tag.
 
 ### Example :
 
