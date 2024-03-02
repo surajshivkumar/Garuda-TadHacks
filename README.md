@@ -54,7 +54,8 @@ In this [interesting talk](https://blog.tadsummit.com/2024/02/14/pieter-luitjens
 - Voice 🔊
 - City 🏢
 - Religion 🛐
-  Is PI. So it is a non-trivial problem to solve for.
+
+Are also PI. So it is a non-trivial problem to solve for.
 
 ### Demo🤖
 
