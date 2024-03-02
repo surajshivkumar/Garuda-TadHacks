@@ -1,2 +1,2 @@
 # Bulls-TadHacks24
-![Tadhack logo](./src/static/images/logo.png)
+![Tadhack logo](./src/static/images/Logo.png)
