@@ -1,0 +1,149 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000000; /* Adjust the color to match the background in the image */
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 80px; /* Adjust based on the width of your sidebar */
+  background-color: #101827; /* Adjust the color to match the sidebar in the image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px; /* Space at the top */
+}
+
+.sidebar-img {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-img:hover {
+  transform: scale(1.2); /* Make the icon 20% larger on hover */
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8rem;
+}
+
+.main-logo {
+  height: 4rem;
+  margin-bottom: 2rem;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 3rem; */
+  /* margin-right: 1rem; */
+  color: #9bcf53;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+
+.main-text {
+  color: #22c55f;
+  /* margin-top: 100px; Space between text and button */
+  margin-bottom: 2rem;
+}
+
+.upload-btn {
+  background-color: #187e3d; /* Green color for the button */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners for the button */
+  font-size: 16px;
+  margin-bottom: 5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .main-content {
+    width: 100%;
+  }
+  .main-logo {
+    width: 200px; /* Smaller logo for mobile */
+  }
+}
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to your text */
+.description {
+  opacity: 0; /* Make the text initially invisible */
+  animation: fadeIn 1s ease-in forwards; /* Use the fadeIn animation over 2 seconds */
+}
+
+.comparison-container {
+  display: flex; /* Aligns children (box divs) in a row */
+  justify-content: center; /* Center the boxes horizontally */
+  align-items: center; /* Center the boxes vertically */
+  gap: 5rem; /* Adds space between the two boxes */
+  margin-bottom: 4rem;
+}
+
+.box {
+  width: 35rem; /* Width of each box */
+  height: 35rem; /* Height of each box */
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+  border: 2px solid #9bcf53; /* Adds border to boxes */
+}
+
+.original {
+  background-color: #101827; /* Light grey background */
+}
+
+.transformed {
+  background-color: #101827; /* Slightly different background color */
+}
+
+.title-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+.original-title {
+  color: #9bcf53;
+}
+.redacted-title {
+  color: #9bcf53;
+}
