@@ -12,7 +12,7 @@ fileformats = {
 }
 
 class InitiateVcon:
-    def __init__(self, vconPath = '/Users/nagasai/Desktop/vcon.json',topic = 'Technical Support Call',deviceUsed = 'Smartphone',
+    def __init__(self, vconPath = './vcon.json',topic = 'Technical Support Call',deviceUsed = 'Smartphone',
                  networkType = 'VoIP',role = 'customer',
                  identifier  = 'customer123@email.com',
                  displayName = "Alice Johnson",
