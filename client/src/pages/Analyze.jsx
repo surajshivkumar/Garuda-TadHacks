@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router-dom';
 
 const Analyze = () => {
@@ -25,31 +27,31 @@ const Analyze = () => {
   };
 
   return (
-    <div className="flex flex-col bg-black">
+    <div className="flex flex-col bg-black h-screen">
       <div className="flex mt-3">
         <audio
           id="audioPlayer1"
           src={audioSrc1}
           controls
-          className="w-1/2 m-4 overflow-auto"
+          className="w-2/4 m-3 overflow-auto"
         />
         <button
           onClick={() => handleDownload(audioSrc1)}
-          className="m-4 py-1 px-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          className="m-4 py-1 px-2 bg-white text-[#34D399] rounded hover:text-white  hover:bg-[#34D399]"
         >
-          Download
+          <FontAwesomeIcon icon={faDownload} />
         </button>
         <audio
           id="audioPlayer2"
           src={audioSrc2}
           controls
-          className="w-1/2 m-4 overflow-auto"
+          className="w-2/4 m-3 overflow-auto"
         />
         <button
           onClick={() => handleDownload(audioSrc2)}
-          className="m-4 py-1 px-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          className="m-4 py-1 px-2 bg-white text-[#34D399] rounded hover:text-white hover:bg-[#34D399]"
         >
-          Download
+          <FontAwesomeIcon icon={faDownload} />
         </button>
       </div>
       <div className="flex mt-3">
