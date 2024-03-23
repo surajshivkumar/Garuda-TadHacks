@@ -32,7 +32,7 @@ function HomeComponent() {
           })
           .then((response) => {
             setAnalyzing(false);
-            navigate("/analyze", { state: { data: response.data } }); // Pass data to Analyze component
+            navigate("/analyze"); // Pass data to Analyze component
           })
           .catch((error) => {
             setAnalyzing(false); // Reset analyzing state on error
