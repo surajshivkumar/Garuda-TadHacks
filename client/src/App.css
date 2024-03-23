@@ -14,3 +14,9 @@ body {
   border: 3px solid #34D399;
   border-radius: 2.5%;
 }
+
+input[type="file"] {
+  background-color: white; /* Set background color to white */
+  color: black; /* Set text color to black */
+  /* Add any other styling you need */
+}

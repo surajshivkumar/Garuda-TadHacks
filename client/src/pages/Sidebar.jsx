@@ -6,7 +6,7 @@ import settings from '../images/settings.svg';
 import team from '../images/team.svg';
 
 const Sidebar = ({ isLoggedIn, userRole, onLogout }) => (
-    <div className="flex justify-center items-center flex-col h-screen w-100 bg-gray-900">
+    <div className="flex justify-center items-center flex-col h-screen w-100 bg-black">
             <div className="sidebar-icon">
                 <Link to="/home">
                     <img
