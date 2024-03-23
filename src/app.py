@@ -1,4 +1,4 @@
-from flask import Flask, request,jsonify,render_template
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import os
 from vidCon.videoCon import GetVcon
@@ -6,46 +6,49 @@ from vidCon.videoCon import GetVcon
 from werkzeug.utils import secure_filename
 
 
-
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-@app.route('/')
-@app.route('/home')
+
+@app.route("/")
+@app.route("/home")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/upload', methods=['POST','GET'])
+
+@app.route("/upload", methods=["POST", "GET"])
 def upload_file():
     global file
-    if 'file' not in request.files:
-        return 'No file part', 400
-    file = request.files['file']
-    if file.filename == '':
-        return 'No selected file', 400
+    print("File")
+    # print(request.files["file"])
+    # if "file" not in request.files:
+    #     return "No file part", 400
+    file = request.files["file"]
+    print(file, file.filename)
+    # if file.filename == "":
+    #     return "No selected file", 400
     if file:
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return jsonify('File successfully uploaded', 200)
-    
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        return jsonify("File successfully uploaded", 200)
 
-@app.route('/vcon', methods=['GET'])
+
+@app.route("/vcon", methods=["GET"])
 def showVcon():
-    file = os.listdir('./uploads')[0]
-    v = GetVcon(f'./{UPLOAD_FOLDER}/{file}')
+    file = os.listdir("./uploads")[0]
+    v = GetVcon(f"./{UPLOAD_FOLDER}/{file}")
     v.read_audio()
     v.transcribe_audio()
     # os.remove(f'./{UPLOAD_FOLDER}/{file}')
-    return jsonify({'transcribed':v.vcon_['transcribed']['text']})
+    return jsonify({"transcribed": v.vcon_["transcribed"]["text"]})
 
 
-@app.route('/analyze', methods=['GET'])
+@app.route("/analyze", methods=["GET"])
 def Analyze():
-    return render_template('analyze.html')
+    return render_template("analyze.html")
 
 
-    
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
