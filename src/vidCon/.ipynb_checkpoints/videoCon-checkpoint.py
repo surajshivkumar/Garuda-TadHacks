@@ -1,19 +1,11 @@
 import sys
 import vcon
 import os
+import whisper
 from io import BytesIO
 import jose.utils
 import jose.jws
 import jose.jwe
-import warnings
-import whisper
-
-# Temporarily suppress all warnings
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    model = whisper.load_model("base")
-
-warnings.filterwarnings("ignore")
 
 
 class GetVcon:

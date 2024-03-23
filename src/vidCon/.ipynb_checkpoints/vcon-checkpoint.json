@@ -1,0 +1,133 @@
+
+{
+
+  "vConVersion": "",
+
+  "conversationID": "",
+
+  "startTime": "",
+
+  "endTime": "",
+
+  "duration": 0,
+
+  "participants": [
+
+    {
+
+      "role": "",
+
+      "identifier": "",
+
+      "displayName": "",
+
+      "location": ""
+
+    }
+
+
+
+  ],
+
+  "metaData": {
+
+    "topic": "",
+
+    "deviceUsed": "",
+
+    "networkType": "",
+
+    "additionalInfo": {}
+
+ 
+  },
+
+  "dialog": [
+
+    {
+
+      "timestamp": "",
+
+      "speaker": "",
+
+      "contentType": "",
+
+      "content": ""
+
+    }
+
+  ],
+
+  "analysis": {
+
+    "transcriptions": [
+
+      {
+
+        "timestamp": "",
+
+        "speaker": "",
+
+        "text": ""
+
+      }
+
+    ],
+
+    "sentiment": [
+
+      {
+
+        "timestamp": "",
+
+        "speaker": "",
+
+        "sentimentScore": 0,
+
+        "sentiment": ""
+
+      }
+
+
+    ]
+
+  },
+
+  "conversationalDocuments": [
+
+    {
+
+      "type": "",
+
+      "url": ""
+
+    }
+
+
+  ],
+
+  "tamperProtection": {
+
+    "signature": "",
+
+    "algorithm": ""
+
+  },
+
+  "certifications": [
+
+    {
+
+      "type": "",
+
+      "details": ""
+
+    }
+
+  ],
+
+  "vConCreatorSpecificData": {
+
+  }
+
+}
