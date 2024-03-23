@@ -44,8 +44,8 @@ function HomeComponent() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-black">
-      <div className="bg-black p-2 rounded-lg mb-4">
-        <img src={logo} alt="TADHack Logo" />
+      <div className="bg-black p-1 rounded-lg mb-4">
+        <img src={logo} className="w-1/2 mx-auto" alt="TADHack Logo" />
       </div>
       <p className="description text-center text-lg text-green-500 font-semibold">
         Generate a redacted vcon in seconds...
