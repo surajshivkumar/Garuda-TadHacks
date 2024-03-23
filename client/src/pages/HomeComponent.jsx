@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from '../images/Logo.png';
 
 function HomeComponent() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
+  const handleFileChange = (event) => {
+      setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = () => {
+      if (!selectedFile) return;
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      axios.post('http://localhost:5296/api/TopHundredTrades/UploadCsv', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+      })
+          .then(response => {
+              // setTrades(response.data);
+              console.log(response);
+          })
+          .catch(error => {
+              console.error(error);
+          })
+          .finally(() => setLoading(false));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div className='bg-black p-2 rounded-lg mb-4'>
@@ -14,9 +41,9 @@ function HomeComponent() {
         Generate a redacted vcon in seconds...
       </p>
       <div className="flex flex-col items-center">
-        <input type="file" className="border border-gray-300 p-2 rounded-lg mb-4" />
-        <button className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out">
-          Upload Audio
+        <input type="file" className="border border-gray-300 p-2 rounded-lg mb-4" onChange={handleFileChange} />
+        <button className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out" onClick={handleUpload} disabled={!selectedFile || loading}>
+            {loading ? 'Uploading...' : 'Upload'}
         </button>
       </div>
       <div className="flex mt-3">
