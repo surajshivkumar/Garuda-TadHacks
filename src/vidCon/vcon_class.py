@@ -9,7 +9,7 @@ fileformats = {".mp3": "audio", ".wav": "audio", ".docx": "document", ".txt": "S
 class InitiateVcon:
     def __init__(
         self,
-        vconPath="./vcon.json",
+        vconPath="./vidCon/vcon.json",
         topic="Technical Support Call",
         deviceUsed="Smartphone",
         networkType="VoIP",
