@@ -1,9 +1,9 @@
 import json
+import json
 import random
-from datetime import datetime
-
 
 fileformats = {".mp3": "audio", ".wav": "audio", ".docx": "document", ".txt": "SMS"}
+from datetime import datetime
 
 
 class InitiateVcon:
@@ -39,8 +39,6 @@ class InitiateVcon:
         self.set_certificate(certificate)
         self.set_tamperprotection(signature, algorithm)
 
-        print(self.json_data["analysis"])
-
     def set_default_id(self):
         self.json_data["vConVersion"] = "1.0"
 
@@ -49,7 +47,6 @@ class InitiateVcon:
         date_part = current_datetime.strftime("%Y%m%d")
         hour_part = current_datetime.strftime("%H%M%S")
         random_code = f"{date_part}-{hour_part}"
-        print(random_code)
         return random_code
 
     def set_certificate(self, certificate):

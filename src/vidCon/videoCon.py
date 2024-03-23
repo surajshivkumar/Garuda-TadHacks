@@ -1,22 +1,20 @@
+# Temporarily suppress all warnings
 import sys
-import vcon
 import os
 from io import BytesIO
 import jose.utils
 import jose.jws
 import jose.jwe
 import warnings
+import json
+
+from datetime import datetime
+
 import whisper
-
-# Temporarily suppress all warnings
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    model = whisper.load_model("base")
-
-warnings.filterwarnings("ignore")
 
 
 class GetVcon:
+
     """Handles operations related to voice communications."""
 
     def __init__(self, recordingName) -> None:

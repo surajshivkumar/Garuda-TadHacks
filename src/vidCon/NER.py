@@ -2,6 +2,7 @@ from transformers import pipeline
 
 
 class PrivacyFilter:
+
     """Initializes and applies a privacy filter to transcribed text."""
 
     def __init__(self):

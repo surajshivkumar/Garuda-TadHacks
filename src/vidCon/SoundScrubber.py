@@ -3,6 +3,7 @@ import re
 
 
 class SoundScrubber:
+
     """
     Handles "scrubbing" of private information from sound files.
     """
@@ -29,7 +30,7 @@ class SoundScrubber:
         ]
         return words_to_silence
 
-    def silenceAudio(self, words_to_silence, transcribed_word_timestamps,delta=0.01):
+    def silenceAudio(self, words_to_silence, transcribed_word_timestamps, delta=0.01):
         """Applies silence to specified segments of the audio."""
         silence_segments = []
 
@@ -38,7 +39,9 @@ class SoundScrubber:
             if any(
                 word[0].strip().lower() in normalized_word for word in words_to_silence
             ):
-                silence_segments.append(((ts["start"] - delta) * 1000, (ts["end"]+delta/2) * 1000))
+                silence_segments.append(
+                    ((ts["start"] - delta) * 1000, (ts["end"] + delta / 2) * 1000)
+                )
 
         for start, end in silence_segments:
             silence = AudioSegment.silent(duration=end - start)

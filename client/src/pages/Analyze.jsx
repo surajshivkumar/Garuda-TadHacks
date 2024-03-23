@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const Analyze = () => {
   const [audioSrc1, setAudioSrc1] = useState(null);
   const [audioSrc2, setAudioSrc2] = useState(null);
-  const [text1, setText1] = useState('');
-  const [text2, setText2] = useState('');
+  const [text1, setText1] = useState("");
+  const [text2, setText2] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/analyze');
+        const response = await fetch("http://127.0.0.1:5000/analyze");
         const data = await response.json();
         console.log(data);
-        setText1(data.dialog[0].content);
-        setText2(data.dialog[1].content);
+        setText1(data["analysis"]["transcriptions"][0]["text"]);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 

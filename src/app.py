@@ -10,6 +10,11 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 
 
+from numba import config
+
+config.THREADING_LAYER = "tbb"
+
+
 app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = "uploads"
@@ -46,7 +51,7 @@ def showVcon():
     # return jsonify({"transcribed": v.vcon_["transcribed"]["text"]})
 
 
-@app.route("/analyze", methods=["GET"])
+@app.route("/analyze", methods=["GET", "POST"])
 def Analyze():
     vCon = InitiateVcon()
     audio_file_name = os.path.join(
