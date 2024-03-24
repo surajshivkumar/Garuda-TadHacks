@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Analyze = () => {
   const [audioSrc1, setAudioSrc1] = useState(null);
@@ -8,24 +9,41 @@ const Analyze = () => {
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState("Transcribing audio...");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoadingMessage("Transcribing audio...");
         const response = await fetch("http://127.0.0.1:5000/analyze");
         const data = await response.json();
         console.log(data);
         setText1(data["analysis"]["transcriptions"][0]["text"]);
-        // Assuming there's a second text to set, otherwise adjust as needed
-        setText2(data["analysis"]["redaction"]); // Fixed from setText1 to setText2 for the second piece of text
-        setLoading(false); // Update the loading state to false once data is fetched
+        setText2(data["analysis"]["redaction"]);
+        setLoading(false); // Update loading state to false after fetching data
       } catch (error) {
         console.error("Error fetching data:", error);
-        setLoading(false); // Also update the loading state to false in case of error
+        setLoading(false); // Update loading state to false in case of error
       }
     };
 
+    const loadingMessages = [
+      "Transcribing audio...",
+      "Identifying personnel information...",
+      "Redacting...",
+      "Generating output...",
+    ];
+
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      setLoadingMessage(loadingMessages[currentIndex]);
+      currentIndex = (currentIndex + 1) % loadingMessages.length;
+    }, 3000);
+
     fetchData();
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleDownload = (audioSrc) => {
@@ -62,7 +80,13 @@ const Analyze = () => {
   return (
     <div className="flex flex-col bg-black h-screen">
       {loading ? (
-        <p>Loading...</p>
+        <div className="flex flex-col items-center justify-center h-screen">
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="fa-spin text-white text-4xl mb-4" // Adjust text size (text-4xl) and margin (mb-4) as needed
+          />
+          <p className="text-center text-white">{loadingMessage}</p>
+        </div>
       ) : (
         <>
           <div className="flex mt-3">
