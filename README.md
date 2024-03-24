@@ -66,3 +66,5 @@ We create a simple demo application in which we upload a conversation in the for
 ```bash
 python app.py #launch the flask server
 ```
+
+![Product Demo](./src/static/images/demo.gif)
