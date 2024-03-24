@@ -16,9 +16,12 @@ const Analyze = () => {
         const data = await response.json();
         console.log(data);
         setText1(data["analysis"]["transcriptions"][0]["text"]);
-        setLoading(false);
+        // Assuming there's a second text to set, otherwise adjust as needed
+        setText2(data["analysis"]["redaction"]); // Fixed from setText1 to setText2 for the second piece of text
+        setLoading(false); // Update the loading state to false once data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false); // Also update the loading state to false in case of error
       }
     };
 
@@ -34,6 +37,28 @@ const Analyze = () => {
     document.body.removeChild(link);
   };
 
+  const renderTextWithHighlights = (text) => {
+    // Splitting the text by "<Redacted>" and creating elements
+    const parts = text.split(/<Redacted>/gi);
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part}
+        {index < parts.length - 1 && (
+          <span
+            style={{
+              backgroundColor: "green",
+              color: "black",
+              padding: "2px 4px",
+              borderRadius: "4px",
+            }}
+          >
+            REDACTED
+          </span>
+        )}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="flex flex-col bg-black h-screen">
       {loading ? (
@@ -43,7 +68,7 @@ const Analyze = () => {
           <div className="flex mt-3">
             <audio
               id="audioPlayer1"
-              src={audioSrc1}
+              src={"http://127.0.0.1:5000/uploads/a.mp3"}
               controls
               className="w-2/4 m-3 overflow-auto"
             />
@@ -55,7 +80,7 @@ const Analyze = () => {
             </button>
             <audio
               id="audioPlayer2"
-              src={audioSrc2}
+              src={"http://127.0.0.1:5000/uploads/redacted.mp3"}
               controls
               className="w-2/4 m-3 overflow-auto"
             />
@@ -71,7 +96,9 @@ const Analyze = () => {
               <p className="h-full p-4 text-white">{text1}</p>
             </div>
             <div className="scrollable-box w-1/2 m-4 overflow-auto">
-              <p className="h-full p-4">{text2}</p>
+              <p className="h-full p-4 text-white">
+                {renderTextWithHighlights(text2)}
+              </p>
             </div>
           </div>
         </>
