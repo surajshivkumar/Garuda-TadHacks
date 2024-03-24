@@ -30,23 +30,29 @@ class SoundScrubber:
         ]
         return words_to_silence
 
-    def silenceAudio(self, words_to_silence, transcribed_word_timestamps, delta=0.01):
+    def silenceAudio(self, words_to_silence, transcribed_word_timestamps, delta=0.3, delta_start=0.05):
         """Applies silence to specified segments of the audio."""
         silence_segments = []
-
+        w2s = [i.lower().strip(' ') for i in words_to_silence]
+        print(transcribed_word_timestamps)
+        print(w2s)
+        # print(transcribed_word_timestamps)
+        
         for ts in transcribed_word_timestamps:
-            normalized_word = ts["word"].strip().lower()
-            if any(
-                word[0].strip().lower() in normalized_word for word in words_to_silence
-            ):
+            # normalized_word = ts["word"].strip().lower()
+            # if any(
+            #     word[0].strip().lower() in normalized_word for word in words_to_silence
+            # ):
+            if ts['word'].strip(' ').strip('-').strip(',').lower() in w2s:
                 silence_segments.append(
-                    ((ts["start"] - delta) * 1000, (ts["end"] + delta / 2) * 1000)
+                    ((ts["start"] - delta_start ) * 1000, (ts["end"] + delta) * 1000)
                 )
-
+        
+        print(silence_segments)
         for start, end in silence_segments:
             silence = AudioSegment.silent(duration=end - start)
             self.audio = self.audio[:start] + silence + self.audio[end:]
 
-        outspath = "./redacted.mp3"
+        outspath = "./uploads/redacted.mp3"
         self.audio.export(outspath, format="mp3")
         print(f"Redacted audio saved at {outspath}")

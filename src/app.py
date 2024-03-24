@@ -1,19 +1,20 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import os
 from vidCon.vcon_class import InitiateVcon
 from vidCon.videoCon import GetVcon
 from vidCon.NER import PrivacyFilter
 from vidCon.SoundScrubber import SoundScrubber
-
+from threading import Lock
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
-
 from numba import config
 
+AUDIO_FILES_DIR = os.path.join(os.getcwd(), "uploads")
 config.THREADING_LAYER = "tbb"
-
+# config.THREADING_LAYER = "tbb"
+from numba import njit, prange
 
 app = Flask(__name__)
 CORS(app)
@@ -53,6 +54,7 @@ def showVcon():
 
 @app.route("/analyze", methods=["GET", "POST"])
 def Analyze():
+    # with lock:
     vCon = InitiateVcon()
     audio_file_name = os.path.join(
         app.config["UPLOAD_FOLDER"], os.listdir("./uploads")[0]
@@ -70,6 +72,7 @@ def Analyze():
 
     privacy_filter = PrivacyFilter()
     entities = privacy_filter.getEntities(transcribed_text)
+    redacted_text = privacy_filter.redact_words(text=transcribed_text)
     sound_scrubber = SoundScrubber(audio_file_name)
     words_to_silence = sound_scrubber.getWordsToSilence(entities)
     words_to_silence = [j for i in words_to_silence for j in i]
@@ -78,6 +81,7 @@ def Analyze():
 
     dt = datetime.now()
     normal_form = dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    vCon.json_data["analysis"]["redaction"] = redacted_text
     vCon.json_data["dialog"][0]["timestamp"] = normal_form
     vCon.json_data["dialog"][0]["content"] = vcon_processor.encoded_bytes
     vCon.set_analysis_date(
@@ -89,5 +93,10 @@ def Analyze():
     return jsonify(vCon.json_data)
 
 
+@app.route("/uploads/<filename>")
+def serve_audio(filename):
+    return send_from_directory(AUDIO_FILES_DIR, filename)
+
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000,threaded=True)
