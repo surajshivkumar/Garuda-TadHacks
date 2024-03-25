@@ -7,7 +7,7 @@ class SentimentAnalyzer:
         self.model = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
     
     def analyze_sentiment(self, text):
-        return self.sentiment_task(text)
+        return self.model(text)
 
 
 # Usage

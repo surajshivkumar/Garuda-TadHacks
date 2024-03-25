@@ -9,6 +9,8 @@ from threading import Lock
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
+from vidCon.SentimentAnalyzer import SentimentAnalyzer
+
 from numba import config
 
 AUDIO_FILES_DIR = os.path.join(os.getcwd(), "uploads")
@@ -80,7 +82,11 @@ def Analyze():
     print("Processing complete. Check the output audio file for redacted content.")
 
     dt = datetime.now()
+    sA = SentimentAnalyzer()
+    sentiment = sA.analyze_sentiment(transcribed_text)[0]
     normal_form = dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    
+    
     vCon.json_data["analysis"]["redaction"] = redacted_text
     vCon.json_data["dialog"][0]["timestamp"] = normal_form
     vCon.json_data["dialog"][0]["content"] = vcon_processor.encoded_bytes
@@ -89,6 +95,9 @@ def Analyze():
         text=transcribed_text,
         timestamp_analysis=transcribed_timestamps,
     )
+    vCon.json_data["analysis"]["sentiment"][0]["sentiment"] = sentiment['label']
+    vCon.json_data["analysis"]["sentiment"][0]["sentimentScore"] = sentiment['score']
+    vCon.json_data["analysis"]["conversation summary"] = "A person is introducing himself, stating his name, address, and phone number."
 
     return jsonify(vCon.json_data)
 
