@@ -56,8 +56,10 @@ class GetVcon:
         outs = self.model.transcribe(
             self.tempFile, fp16=False, word_timestamps=True, language="English"
         )
+        #print('Transff',outs)
         self.vcon_["transcription"]["transcribed_text"] = outs["text"]
-        self.vcon_["transcription"]["transcribed_word_timestamps"] = outs["segments"][
-            0
-        ]["words"]
+        ws = []
+        for s in  outs["segments"]:
+            ws.append(s['words'])
+        self.vcon_["transcription"]["transcribed_word_timestamps"] = ws
         print("Transcription complete")

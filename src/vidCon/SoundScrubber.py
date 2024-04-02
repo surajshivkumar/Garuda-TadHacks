@@ -30,22 +30,22 @@ class SoundScrubber:
         ]
         return words_to_silence
 
-    def silenceAudio(self, words_to_silence, transcribed_word_timestamps, delta=0.3, delta_start=0.05):
+    def silenceAudio(self, words_to_silence, transcribed_word_timestamps, delta_end=0.1, delta_start=0.0):
         """Applies silence to specified segments of the audio."""
         silence_segments = []
         w2s = [i.lower().strip(' ') for i in words_to_silence]
         print(transcribed_word_timestamps)
-        print(w2s)
+        print("Words to silence:",w2s)
         # print(transcribed_word_timestamps)
-        
+        transcribed_word_timestamps = [j for i in transcribed_word_timestamps for j in i]
         for ts in transcribed_word_timestamps:
             # normalized_word = ts["word"].strip().lower()
             # if any(
             #     word[0].strip().lower() in normalized_word for word in words_to_silence
             # ):
-            if ts['word'].strip(' ').strip('-').strip(',').lower() in w2s:
+            if re.sub(r'\W+', '', ts['word']).lower() in w2s:
                 silence_segments.append(
-                    ((ts["start"] - delta_start ) * 1000, (ts["end"] + delta) * 1000)
+                    ((ts["start"] - delta_start ) * 1000, (ts["end"] + delta_end) * 1000)
                 )
         
         print(silence_segments)
