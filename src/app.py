@@ -14,9 +14,9 @@ from vidCon.SentimentAnalyzer import SentimentAnalyzer
 from numba import config
 
 AUDIO_FILES_DIR = os.path.join(os.getcwd(), "uploads")
-config.THREADING_LAYER = "tbb"
+config.THREADING_LAYER = "workqueue"
 # config.THREADING_LAYER = "tbb"
-from numba import njit, prange
+
 
 app = Flask(__name__)
 CORS(app)
@@ -108,4 +108,4 @@ def serve_audio(filename):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000,threaded=True)
+    app.run(debug=True, port=5000,threaded=False)
