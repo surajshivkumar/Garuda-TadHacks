@@ -35,7 +35,7 @@ class SoundScrubber:
         silence_segments = []
         w2s = [i.lower().strip(' ') for i in words_to_silence]
         print(transcribed_word_timestamps)
-        print("Words to silence:",w2s)
+        # print("Words to silence:",w2s)
         # print(transcribed_word_timestamps)
         transcribed_word_timestamps = [j for i in transcribed_word_timestamps for j in i]
         for ts in transcribed_word_timestamps:
